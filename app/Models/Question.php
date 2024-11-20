@@ -18,7 +18,7 @@ class Question extends Model
 
     //nanti benerin table kuisioner
     public function answer() {
-        return $this->hasMany(Answer::class );
+        return $this->hasMany(Answer::class, 'kuisioner_id','id');
     }
 
     public function questionCategory() {

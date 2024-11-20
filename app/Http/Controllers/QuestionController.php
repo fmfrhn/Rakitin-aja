@@ -19,7 +19,7 @@ class QuestionController extends Controller
 
     public function showQuestionCategory(Request $request)
     {
-        $result_question = Question::where('kategori_id', $request->k_id)->get();
+        $result_question = Question::where('kategori_id', $request->k_id)->with('answer')->get();
         session(['total_score' => 0]);
         session(['data_question' => $result_question]);
         return redirect()->route('category.question.show', ['q_id' => 0]);
@@ -42,6 +42,8 @@ class QuestionController extends Controller
         }
 
         $q = $questions[$q_id];
+
+        // dd($q->answer);
         return view('questions', [
             'question' => $q,
             'next_question_id' => $q_id + 1,

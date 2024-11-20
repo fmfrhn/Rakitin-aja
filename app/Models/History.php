@@ -15,8 +15,9 @@ class History extends Model
         'image',
         'price',
         'link',
-
     ];
+
+    public $timestamps = false; // Nonaktifkan timestamps
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
