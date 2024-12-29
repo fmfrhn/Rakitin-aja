@@ -19,7 +19,7 @@ class QuestionController extends Controller
 
     public function showQuestionCategory(Request $request)
     {
-        $result_question = Question::where('kategori_id', $request->k_id)->with('answer')->get();
+        $result_question = Question::where('category_id', $request->k_id)->with('answer')->get();
         session(['total_score' => 0]);
         session(['data_question' => $result_question]);
         return redirect()->route('category.question.show', ['q_id' => 0]);
@@ -35,7 +35,7 @@ class QuestionController extends Controller
         //mencari total pertanyan
         $total_question = $questions->count();
 
-        if ($total_question == $q_id + 1) {
+        if ($total_question == $q_id) {
             return redirect()->route('result.sparepart', [
                 'total_score' => $total_score
             ]);
@@ -80,13 +80,13 @@ class QuestionController extends Controller
         $low_end = $total_question / 3;
 
         if ($total_score <= $mid_end) {
-            $computers = Recommendation::where('tipe_spesifikasi', 'MID_END')->get();
+            $computers = Recommendation::where('tipe_spesifikasi', 'high')->get();
         }
 
         if ($total_score <= $low_end) {
-            $computers = Recommendation::where('tipe_spesifikasi', 'LOW_END')->get();
+            $computers = Recommendation::where('tipe_spesifikasi', 'mid')->get();
         } else {
-            $computers = Recommendation::where('tipe_spesifikasi', 'HIGH_END')->get();
+            $computers = Recommendation::where('tipe_spesifikasi', 'low')->get();
         }
         // dd($rekomendasi->toArray());
         session(['result' => $computers]);

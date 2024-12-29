@@ -29,26 +29,26 @@ class AnswerResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('kategori_id')
+                Select::make('category_id')
                     ->label('Kategori')
                     ->options(fn() => QuestionCategory::pluck('nama_kategori', 'id')->toArray())
                     ->reactive() // Menjadikan kategori_id reaktif
                     ->required()
                     ->nullable(),  // Menandakan bahwa kategori_id ini bisa kosong dan tidak harus dipilih
 
-                Select::make('kuisioner_id')
+                Select::make('question_id')
                     ->label('Pertanyaan')
                     ->options(function (callable $get) {
                         // Ambil kategori_id yang dipilih
-                        $kategoriId = $get('kategori_id');
+                        $kategoriId = $get('category_id');
 
-                        // Jika kategori_id tidak dipilih, kembalikan opsi kosong
+                        // Jika category_id tidak dipilih, kembalikan opsi kosong
                         if (!$kategoriId) {
                             return [];
                         }
 
-                        // Ambil pertanyaan berdasarkan kategori_id yang dipilih
-                        return Question::where('kategori_id', $kategoriId)
+                        // Ambil pertanyaan berdasarkan category_id yang dipilih
+                        return Question::where('category_id', $kategoriId)
                             ->pluck('pertanyaan', 'id');
                     })
                     ->required() // Anda bisa membuatnya wajib dipilih atau tidak

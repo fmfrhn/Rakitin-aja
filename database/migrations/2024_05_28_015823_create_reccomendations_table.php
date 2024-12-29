@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('recommendations', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('category_id');
+            $table->foreignId('category_id')->constrained('question_categories')->cascadeOnDelete();
             $table->string('tipe_spesifikasi');
             $table->string('spesifikasi');
             $table->string('link');

@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    protected $table = 'kuisioner';
+    protected $table = 'questions';
 
     protected $fillable = [
-        'kategori_id',
+        'category_id',
         'pertanyaan',
         'created_at',
         'updated_at'
@@ -18,10 +18,10 @@ class Question extends Model
 
     //nanti benerin table kuisioner
     public function answer() {
-        return $this->hasMany(Answer::class, 'kuisioner_id','id');
+        return $this->hasMany(Answer::class, 'question_id','id');
     }
 
     public function questionCategory() {
-        return $this->belongsTo(QuestionCategory::class, 'kategori_id');
+        return $this->belongsTo(QuestionCategory::class, 'category_id');
     }
 }

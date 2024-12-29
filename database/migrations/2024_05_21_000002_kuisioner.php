@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->constrained('question_categories')->cascadeOnDelete();
+            $table->string('pertanyaan');
             $table->timestamps();
         });
     }

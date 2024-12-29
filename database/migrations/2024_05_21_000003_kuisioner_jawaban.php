@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kuisioner', function (Blueprint $table) {
+        Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            $table->integer('kategori_id');
-            $table->string('pertanyaan');
+            $table->foreignId('question_id')->constrained('questions')->cascadeOnDelete();
+            $table->string('jawaban');
+            $table->float('bobot');
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kuisioner');
+        Schema::dropIfExists('kuisioner_jawaban');
     }
 };

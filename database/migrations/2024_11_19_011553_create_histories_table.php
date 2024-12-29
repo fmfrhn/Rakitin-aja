@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('spesifikasi');
             $table->string('image');
             $table->string('price');

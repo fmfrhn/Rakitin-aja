@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Statics\TipeSpesifikasiStatic;
 use Filament\Forms;
+use Filament\Forms\Components\Textarea;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
@@ -34,18 +35,19 @@ class RecommendationResource extends Resource
                 Select::make('category_id')
                     ->label('Kategori')
                     ->options(fn() => QuestionCategory::pluck('nama_kategori', 'id')->toArray()),
-                Select::make('category_id')
-                    ->label('Kategori')
+                Select::make('tipe_spesifikasi')
+                    ->label('Tipe Spesifikasi')
                     ->options(fn() => TipeSpesifikasiStatic::options()),
-                TextInput::make('spesifikasi')
+                Textarea::make('spesifikasi')
                     ->required()
                     ->maxLength(255),
                 TextInput::make('link')
                     ->required()
                     ->maxLength(255),
-                FileUpload::make('image')
-                    ->image()
-                    ->required(),
+                TextInput::make('image')
+                    ->label('Image URL')
+                    ->required()
+                    ->maxLength(255),
                 TextInput::make('price')
                     ->required()
                     ->numeric()
@@ -76,7 +78,7 @@ class RecommendationResource extends Resource
                     ->searchable(),
                 ImageColumn::make('image'),
                 TextColumn::make('price')
-                    ->money()
+                    ->money('IDR')
                     ->sortable(),
             ])
             ->filters([

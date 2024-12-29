@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Answer extends Model
 {
     use HasFactory;
-    protected $table = 'kuisioner_jawaban';
+    protected $table = 'answers';
     protected $fillable = [
-        'kuisioner_id',
+        'question_id',
         'bobot',
         'jawaban',
         'created_at',

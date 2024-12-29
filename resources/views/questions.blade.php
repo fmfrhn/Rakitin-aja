@@ -5,6 +5,7 @@
         <div class="bg-dark-05">
             <div class="container">
                 <div class="row g-4">
+                    
                     <div class="col-12 col-lg-8 col-xl-7">
                         <h1> Skor Anda : {{ $total_score }}</h1>
                         <p class="mt-4 text-white" style="font-family: sans-serif; font-size: 20px;">
